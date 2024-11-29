@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart'; 
-import 'package:my_project/carstat/app/profile.dart'; 
+import 'package:flutter/material.dart';
+
+import 'package:my_project/carstat/app/profile.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -7,15 +8,15 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      width: 220,
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-
           const UserAccountsDrawerHeader(
             accountName: Text('User Name'),
             accountEmail: Text('user@example.com'),
             currentAccountPicture: CircleAvatar(
-              backgroundImage: NetworkImage('https://via.placeholder.com/150'),
+              backgroundImage: AssetImage(''),
             ),
             decoration: BoxDecoration(
               color: Colors.deepPurple,
