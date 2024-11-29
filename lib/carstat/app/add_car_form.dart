@@ -63,11 +63,11 @@ class _AddCarFormPageState extends State<AddCarFormPage> {
               },
             ),
             TextFormField(
-              decoration: const InputDecoration(labelText: 'Brand'),
+              decoration: const InputDecoration(labelText: 'Make'),
               controller: _makeController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter the brande of the car';
+                  return 'Please enter the make of the car';
                 }
                 return null;
               },

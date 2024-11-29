@@ -16,7 +16,7 @@ class Car {
   Map<String, dynamic> toJson() => {
     'year': year,
     'mileage': mileage,
-    'brande': make,
+    'make': make,
     'model': model,
     'zeroToSixty': zeroToSixty,
   };
@@ -24,7 +24,7 @@ class Car {
   static Car fromJson(Map<String, dynamic> json) => Car(
     year: json['year'] as int,
     mileage: json['mileage'] as int,
-    make: json['brande'] as String,
+    make: json['make'] as String,
     model: json['model'] as String,
     zeroToSixty: json['zeroToSixty'] as double,
   );

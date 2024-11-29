@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_project/carstat/app/autologin_page.dart';
 import 'package:my_project/carstat/app/home_page.dart';
 import 'package:my_project/carstat/app/login.dart';
 import 'package:my_project/carstat/app/profile.dart';
@@ -17,9 +18,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/login',
+      home: const AutologinPage(),
       routes: {
-        '/': (context) => const MainPage(),
+        '/home': (context) => const MainPage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegistrationPage(),
         '/profile': (context) => const ProfilePage(),

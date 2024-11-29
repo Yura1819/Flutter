@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class IAuthService {
   Future<String?> register(String name, String email, String password);
-
+  Future<void> logout();
   Future<bool> login(String email, String password);
 }
 
@@ -34,10 +34,15 @@ class AuthService implements IAuthService {
     if (userString != null) {
       final userMap = jsonDecode(userString) as Map<String, dynamic>;
       if (password == userMap['password']) {
-        await prefs.setString('lastLoggedInUser', email);
+        await prefs.setString('currentUser', email);
         return true;
       }
     }
     return false;
+  }
+  @override
+  Future<void> logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('currentUser');
   }
 }
