@@ -2,29 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:my_project/carstat/profile/screen.dart';
 
 class ProfileBody extends StatelessWidget {
-
-  const ProfileBody({super.key}); 
+  const ProfileBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
-      padding: ScreenProf.padding(context), 
-      
+      padding: ScreenProf.padding(context),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, 
-
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Center(
             child: CircleAvatar(
-              radius: ScreenProf.avatarRadius(context), 
-              backgroundImage:
-                  const NetworkImage(''), 
+              radius: ScreenProf.avatarRadius(context),
+              backgroundImage: const AssetImage(''),
             ),
           ),
-          
           const SizedBox(height: 20),
-
           Text(
             'Name: User Name',
             style: TextStyle(
@@ -32,9 +25,7 @@ class ProfileBody extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-
           const SizedBox(height: 10),
-
           Text(
             'Email: user@example.com',
             style: TextStyle(
@@ -42,12 +33,10 @@ class ProfileBody extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-
           const SizedBox(height: 20),
-
           Center(
             child: ElevatedButton(
-              onPressed: () {}, 
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.deepPurple,
               ),

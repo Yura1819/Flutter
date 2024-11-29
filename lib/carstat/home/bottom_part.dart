@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:my_project/carstat/home/screen.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
-  const CustomBottomAppBar({super.key});
+  final VoidCallback onAddPressed;
+
+  const CustomBottomAppBar({required this.onAddPressed, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class CustomBottomAppBar extends StatelessWidget {
           ),
           IconButton(
             icon: Icon(Icons.add, color: Colors.white, size: iconSize),
-            onPressed: () {},
+            onPressed: onAddPressed,
           ),
         ],
       ),
