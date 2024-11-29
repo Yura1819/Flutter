@@ -1,0 +1,20 @@
+{
+  "cars": [
+    {
+      "id": "08f032c2-c4c7-40e6-9645-5ca9bdf55ec9",
+      "make": "BMW",
+      "model": "X7",
+      "year": 2020,
+      "mileage": 214,
+      "zeroToSixty": 1.5
+    },
+    {
+      "id": "b69f8412-5000-4185-a5c9-5e4662b9391e",
+      "make": "MERS",
+      "model": "CLS",
+      "year": 2012,
+      "mileage": 563,
+      "zeroToSixty": 1.2
+    }
+  ]
+}

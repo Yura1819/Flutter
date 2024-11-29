@@ -39,8 +39,8 @@ class _MainPageState extends State<MainPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('No Internet Connection'),
-          content: const Text('You have lost connection to the internet.'
-              ' Some features may not be available.'),
+          content: const Text('You have lost connection to the internet.' 
+                               ' Some features may not be available.'),
           actions: [
             TextButton(
               child: const Text('OK'),
@@ -59,64 +59,70 @@ class _MainPageState extends State<MainPage> {
     _connectivitySubscription.cancel();
     super.dispose();
   }
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Car Stats Tracker',
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.deepPurple,
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text(
+        'Car Stats Tracker',
+        style: TextStyle(color: Colors.white),
       ),
-      drawer: const CustomDrawer(),
-      body: FutureBuilder<List<Car>>(
-        future: _carListFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No cars added yet.'));
-          }
-          final cars = snapshot.data!;
-          return ListView.builder(
-            itemCount: cars.length,
-            itemBuilder: (context, index) {
-              final car = cars[index];
-              return ListTile(
-                title: Text('${car.make} ${car.model}'),
-                subtitle: Text(
-                    'Year: ${car.year} - Mileage: ${car.mileage} - 0 to 60: '
-                        '${car.zeroToSixty}s'),
-                trailing: IconButton(
-                  icon: const Icon(Icons.delete, color: Colors.red),
-                  onPressed: () async {
-                    await _carService.deleteCar(index);
+      backgroundColor: Colors.deepPurple,
+    ),
+    drawer: const CustomDrawer(),
+    body: FutureBuilder<List<Car>>(
+      future: _carListFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(child: Text('No cars added yet.'));
+        }
+        final cars = snapshot.data!;
+        return ListView.builder(
+          itemCount: cars.length,
+          itemBuilder: (context, index) {
+            final car = cars[index];
+            return ListTile(
+              title: Text('${car.make} ${car.model}'),
+              subtitle: Text(
+                  'Year: ${car.year} - Mileage: ${car.mileage} - 0 to 60: '
+                  '${car.zeroToSixty}s'),
+              trailing: IconButton(
+                icon: const Icon(Icons.delete, color: Colors.red),
+                onPressed: () async {
+                  try {
+                    await _carService.deleteCar(car.id);
                     refreshCars();
-                  },
-                ),
-              );
-            },
-          );
-        },
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Failed to delete car')),
+                    );
+                  }
+                },
+              ),
+            );
+          },
+        );
+      },
+    ),
+    bottomNavigationBar: CustomBottomAppBar(
+      onAddPressed: () async {
+        await Navigator.push(
+          context,
+          MaterialPageRoute<void>(builder: (_) => const AddCarFormPage()),
+        );
+        refreshCars();
+      },
+    ),
+  );
+}
 
-      ),
-      bottomNavigationBar: CustomBottomAppBar(
-        onAddPressed: () async {
-          await Navigator.push(
-            context,
-            MaterialPageRoute<void>(builder: (_) => const AddCarFormPage()),
-          );
-          refreshCars();
-        },
-      ),
-    );
-  }
-
-  void refreshCars() {
-    setState(() {
-      _carListFuture = _carService.loadCarList();
-    });
-  }
+void refreshCars() {
+  setState(() {
+    _carListFuture = _carService.loadCarList();
+  });
+}
 }

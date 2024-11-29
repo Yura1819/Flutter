@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_project/carstat/logic/models/car.dart';
 import 'package:my_project/carstat/logic/services/car/car_service.dart';
+import 'package:uuid/uuid.dart';
 
 class AddCarFormPage extends StatefulWidget {
   const AddCarFormPage({super.key});
@@ -17,9 +18,12 @@ class _AddCarFormPageState extends State<AddCarFormPage> {
   final _modelController = TextEditingController();
   final _zeroToSixtyController = TextEditingController();
 
+  final uuid = Uuid();
+
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       final newCar = Car(
+        id: uuid.v4(),
         year: int.parse(_yearController.text),
         mileage: int.parse(_mileageController.text),
         make: _makeController.text,

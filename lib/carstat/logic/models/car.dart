@@ -1,31 +1,41 @@
 class Car {
-  int year;
-  int mileage;
-  String make;
-  String model;
-  double zeroToSixty;
+  final String id;
+  final String make;
+  final String model;
+  final int year;
+  final int mileage;
+  final double zeroToSixty;
 
   Car({
-    required this.year,
-    required this.mileage,
+    required this.id,
     required this.make,
     required this.model,
+    required this.year,
+    required this.mileage,
     required this.zeroToSixty,
   });
 
-  Map<String, dynamic> toJson() => {
-    'year': year,
-    'mileage': mileage,
-    'make': make,
-    'model': model,
-    'zeroToSixty': zeroToSixty,
-  };
+  // Для парсингу з JSON
+  factory Car.fromJson(Map<String, dynamic> json) {
+    return Car(
+      id: json['id'] as String,
+      make: json['make'] as String,
+      model: json['model'] as String,
+      year: int.parse(json['year'].toString()),
+      mileage: int.parse(json['mileage'].toString()),
+      zeroToSixty: double.parse(json['zeroToSixty'].toString()),
+    );
+  }
 
-  static Car fromJson(Map<String, dynamic> json) => Car(
-    year: json['year'] as int,
-    mileage: json['mileage'] as int,
-    make: json['make'] as String,
-    model: json['model'] as String,
-    zeroToSixty: json['zeroToSixty'] as double,
-  );
+  // Для перетворення на JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'make': make,
+      'model': model,
+      'year': year,
+      'mileage': mileage,
+      'zeroToSixty': zeroToSixty,
+    };
+  }
 }
